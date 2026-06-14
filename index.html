@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Laço Vivo — Links</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=DM+Sans:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@1,400;1,600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --pessego:    #F5C4B3;
+  --creme:      #FAECE7;
+  --ambar:      #FAC775;
+  --terra:      #712B13;
+  --terra-vivo: #F0997B;
+  --branco:     #FFF8F4;
+  --cinza:      #3D2016;
+  --cinza-l:    #A07060;
+  --terra-mid:  #8B3520;
+}
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+
+body {
+  font-family:'DM Sans', sans-serif;
+  background: var(--terra);
+  min-height:100vh;
+  display:flex; align-items:center; justify-content:center;
+  padding:40px 20px;
+  position:relative; overflow-x:hidden;
+}
+
+/* círculos decorativos de fundo */
+body::before {
+  content:'';
+  position:fixed; top:-200px; right:-200px;
+  width:600px; height:600px; border-radius:50%;
+  background:var(--terra-mid); opacity:0.6;
+  pointer-events:none;
+}
+body::after {
+  content:'';
+  position:fixed; bottom:-150px; left:-150px;
+  width:400px; height:400px; border-radius:50%;
+  background:#5A1F0E; opacity:0.5;
+  pointer-events:none;
+}
+
+.container {
+  position:relative; z-index:10;
+  width:100%; max-width:480px;
+  display:flex; flex-direction:column;
+  align-items:center; gap:0;
+}
+
+/* ── HEADER ── */
+.header {
+  text-align:center;
+  margin-bottom:36px;
+}
+.brand {
+  font-family:'Playfair Display', serif;
+  font-size:32px; font-weight:700;
+  color:var(--branco); line-height:1;
+  margin-top:8px;
+  margin-bottom:6px;
+}
+.brand span { color:var(--terra-vivo); }
+.handle {
+  font-family:'DM Sans', sans-serif;
+  font-size:14px; color:var(--pessego);
+  opacity:0.7; letter-spacing:1px;
+  margin-bottom:10px;
+}
+.tagline {
+  font-family:'Cormorant Garamond', serif;
+  font-style:italic; font-size:16px;
+  color:var(--pessego); opacity:0.85;
+  line-height:1.5;
+}
+
+/* divisor */
+.divider {
+  width:50px; height:1px;
+  background:var(--terra-vivo); opacity:0.4;
+  margin:20px auto 32px;
+}
+
+/* ── SEÇÃO ── */
+.section-label {
+  font-family:'DM Sans', sans-serif;
+  font-size:11px; font-weight:700;
+  letter-spacing:4px; text-transform:uppercase;
+  color:var(--pessego); opacity:0.55;
+  margin-bottom:12px;
+  align-self:flex-start;
+  padding-left:4px;
+}
+
+/* ── CARDS DE PRODUTO ── */
+.product-card {
+  width:100%;
+  background:var(--branco);
+  border-radius:16px;
+  padding:22px 24px;
+  display:flex; align-items:center; gap:18px;
+  text-decoration:none;
+  margin-bottom:12px;
+  transition:transform 0.2s, box-shadow 0.2s;
+  box-shadow:0 4px 20px rgba(0,0,0,0.2);
+  position:relative; overflow:hidden;
+}
+.product-card::before {
+  content:'';
+  position:absolute; top:0; left:0; bottom:0;
+  width:5px;
+}
+.product-card.maternidade::before { background:var(--terra-vivo); }
+.product-card.bebe::before        { background:var(--ambar); }
+.product-card.colecao::before     { background:var(--pessego); }
+
+.product-card:hover {
+  transform:translateY(-2px);
+  box-shadow:0 8px 32px rgba(0,0,0,0.25);
+}
+.product-card:active { transform:translateY(0); }
+
+.card-icon {
+  width:52px; height:52px; border-radius:12px;
+  display:flex; align-items:center; justify-content:center;
+  font-size:24px; flex-shrink:0;
+}
+.maternidade .card-icon { background:var(--creme); }
+.bebe        .card-icon { background:#FAEEDA; }
+.colecao     .card-icon { background:var(--creme); }
+
+.card-info { flex:1; }
+.card-tag {
+  font-size:10px; font-weight:700; letter-spacing:2px;
+  text-transform:uppercase; margin-bottom:3px;
+}
+.maternidade .card-tag { color:var(--terra-vivo); }
+.bebe        .card-tag { color:#B8900A; }
+.colecao     .card-tag { color:var(--cinza-l); }
+
+.card-title {
+  font-family:'Playfair Display', serif;
+  font-size:17px; font-weight:700;
+  color:var(--terra); line-height:1.2;
+  margin-bottom:4px;
+}
+.card-desc {
+  font-size:12px; color:var(--cinza-l);
+  line-height:1.4;
+}
+.card-price {
+  text-align:right; flex-shrink:0;
+}
+.card-de {
+  font-size:11px; color:var(--cinza-l);
+  text-decoration:line-through; opacity:0.6;
+}
+.card-val {
+  font-family:'Playfair Display', serif;
+  font-size:20px; font-weight:700;
+  color:var(--terra); line-height:1.1;
+}
+.card-val sup { font-size:0.5em; vertical-align:super; }
+
+/* ── BOTÃO SIMPLES ── */
+.simple-btn {
+  width:100%;
+  background:transparent;
+  border:1px solid rgba(245,196,179,0.3);
+  border-radius:14px;
+  padding:18px 24px;
+  display:flex; align-items:center; justify-content:center; gap:12px;
+  text-decoration:none;
+  margin-bottom:10px;
+  transition:background 0.2s, border 0.2s;
+}
+.simple-btn:hover {
+  background:rgba(255,248,244,0.06);
+  border-color:rgba(245,196,179,0.5);
+}
+.simple-btn .btn-icon { font-size:20px; }
+.simple-btn .btn-text {
+  font-family:'DM Sans', sans-serif;
+  font-size:15px; font-weight:500;
+  color:var(--pessego);
+}
+
+/* ── BÔNUS ── */
+.bonus-section {
+  width:100%;
+  background:rgba(255,248,244,0.06);
+  border:1px solid rgba(245,196,179,0.15);
+  border-radius:16px;
+  padding:20px 22px;
+  margin-bottom:12px;
+}
+.bonus-title {
+  font-family:'DM Sans', sans-serif;
+  font-size:11px; font-weight:700;
+  letter-spacing:3px; text-transform:uppercase;
+  color:var(--ambar); margin-bottom:14px;
+}
+.bonus-item {
+  display:flex; align-items:center; gap:12px;
+  padding:8px 0;
+  border-bottom:1px solid rgba(245,196,179,0.1);
+}
+.bonus-item:last-child { border-bottom:none; padding-bottom:0; }
+.bonus-dot {
+  width:6px; height:6px; border-radius:50%;
+  background:var(--ambar); flex-shrink:0;
+}
+.bonus-text {
+  font-family:'DM Sans', sans-serif;
+  font-size:13px; color:var(--pessego); opacity:0.8;
+}
+.bonus-free {
+  margin-left:auto;
+  font-size:10px; font-weight:700;
+  color:var(--ambar); letter-spacing:1px;
+  text-transform:uppercase;
+}
+
+/* ── GARANTIA ── */
+.guarantee {
+  display:flex; align-items:center; gap:10px;
+  margin-top:4px; margin-bottom:28px;
+}
+.guarantee-text {
+  font-family:'DM Sans', sans-serif;
+  font-size:12px; color:var(--pessego); opacity:0.5;
+  text-align:center; line-height:1.5;
+}
+
+/* ── FOOTER ── */
+.footer {
+  text-align:center; margin-top:12px;
+}
+.footer p {
+  font-family:'DM Sans', sans-serif;
+  font-size:11px; color:var(--pessego);
+  opacity:0.35; line-height:1.8;
+}
+
+/* ── ANIMAÇÃO ── */
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(16px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+.product-card, .simple-btn, .bonus-section {
+  animation: fadeUp 0.5s ease both;
+}
+.product-card:nth-child(1) { animation-delay:0.1s; }
+.product-card:nth-child(2) { animation-delay:0.2s; }
+.product-card:nth-child(3) { animation-delay:0.3s; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="brand">Laço<span>.</span>Vivo</div>
+    <div class="handle">@lacovivo</div>
+    <div class="tagline">maternidade com acolhimento<br>e informação de verdade</div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- PRODUTOS -->
+  <div class="section-label">nossos guias</div>
+
+  <!-- Bundle Maternidade -->
+  <a href="https://lacovivo1.github.io/bundle-maternidade" class="product-card maternidade">
+    <div class="card-icon">🌸</div>
+    <div class="card-info">
+      <div class="card-tag">Bundle Maternidade</div>
+      <div class="card-title">Para a mãe que<br>também importa</div>
+      <div class="card-desc">Ainda Sou Eu · Autocuidado · DPP</div>
+    </div>
+    <div class="card-price">
+      <div class="card-de">R$ 53,70</div>
+      <div class="card-val"><sup>R$</sup>34<sup>,90</sup></div>
+    </div>
+  </a>
+
+  <!-- Bundle Saúde do Bebê -->
+  <a href="https://lacovivo1.github.io/bundle-bebe" class="product-card bebe">
+    <div class="card-icon">👶</div>
+    <div class="card-info">
+      <div class="card-tag">Bundle Saúde do Bebê</div>
+      <div class="card-title">Informação certa<br>na hora certa</div>
+      <div class="card-desc">Engasgo · Primeiros Socorros · Refluxo</div>
+    </div>
+    <div class="card-price">
+      <div class="card-de">R$ 59,70</div>
+      <div class="card-val"><sup>R$</sup>39<sup>,90</sup></div>
+    </div>
+  </a>
+
+  <!-- Coleção Completa -->
+  <a href="https://lacovivo1.github.io/Colecao-Completa" class="product-card colecao">
+    <div class="card-icon">✨</div>
+    <div class="card-info">
+      <div class="card-tag">Melhor oferta</div>
+      <div class="card-title">Coleção Completa<br>— todos os 6 guias</div>
+      <div class="card-desc">Bundle Maternidade + Bundle Bebê</div>
+    </div>
+    <div class="card-price">
+      <div class="card-de">R$ 113,40</div>
+      <div class="card-val"><sup>R$</sup>59<sup>,90</sup></div>
+    </div>
+  </a>
+
+  <!-- BÔNUS -->
+  <div class="bonus-section">
+    <div class="bonus-title">+ bônus incluídos em todos os bundles</div>
+    <div class="bonus-item">
+      <div class="bonus-dot"></div>
+      <div class="bonus-text">Cartão de Emergência — SAMU, Bombeiros, CVV</div>
+      <div class="bonus-free">grátis</div>
+    </div>
+    <div class="bonus-item">
+      <div class="bonus-dot"></div>
+      <div class="bonus-text">Checklist da Bolsa do Bebê — 35 itens</div>
+      <div class="bonus-free">grátis</div>
+    </div>
+    <div class="bonus-item">
+      <div class="bonus-dot"></div>
+      <div class="bonus-text">Tabela de Febre por Idade — SBP 2023</div>
+      <div class="bonus-free">grátis</div>
+    </div>
+  </div>
+
+  <!-- GARANTIA -->
+  <div class="guarantee">
+    <div class="guarantee-text">✓ Pagamento seguro &nbsp;·&nbsp; ✓ Acesso imediato &nbsp;·&nbsp; ✓ 7 dias de garantia</div>
+  </div>
+
+  <!-- INSTAGRAM -->
+  <div class="section-label">nos siga</div>
+  <a href="https://instagram.com/lacovivo" class="simple-btn">
+    <span class="btn-icon">📷</span>
+    <span class="btn-text">@lacovivo no Instagram</span>
+  </a>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <p>Laço Vivo · maternidade com acolhimento<br>
+    Material educativo — não substitui orientação médica<br>
+    Em caso de crise: CVV 188 · SAMU 192</p>
+  </div>
+
+</div>
+</body>
+</html>
